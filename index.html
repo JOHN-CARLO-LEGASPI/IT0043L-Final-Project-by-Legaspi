@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>John Carlo Legaspi Portfolio</title>
+  <link rel="stylesheet" href="IT0043L Final Project by Legaspi.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .error { border: 2px solid red; }
+
+    /* 🔄 Form Loading Overlay */
+    #formLoading {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 🎉 Success Popup */
+    #successPopup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.75);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+    }
+
+    #successPopup img {
+      max-width: 300px;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+
+    /* ✅ Page Transition Microinteraction */
+    #pageTransition {
+      position: fixed;
+      z-index: 3000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      color: #fff;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      flex-direction: column;
+      padding: 30px;
+    }
+
+    #pageTransition img {
+      max-width: 300px;
+      margin-bottom: 20px;
+      animation: fadeZoom 1s ease-in-out;
+      border-radius: 15px;
+    }
+
+    #transitionText {
+      font-size: 2rem;
+      font-weight: bold;
+      animation: scaleUp 0.5s ease-in-out;
+    }
+
+    @keyframes scaleUp {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeZoom {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 🔄 Form Submission Loading -->
+<div id="formLoading">
+  <div class="spinner"></div>
+  <h2>Submitting your message...</h2>
+</div>
+
+<!-- 🎉 Cat Celebration Popup -->
+<div id="successPopup">
+  <h2>Message sent successfully! 🎉</h2>
+  <p>Thanks for getting in touch.</p>
+  <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Dancing Cat">
+</div>
+
+<!-- ✅ PAGE TRANSITION OVERLAY -->
+<div id="pageTransition">
+  <img id="transitionImage" src="" alt="Transition Visual">
+  <div id="transitionText">Loading...</div>
+</div>
+
+<!-- ✅ HUMAN VERIFICATION -->
+<div id="loader"><h2>Loading Portfolio...</h2></div>
+<div id="verification">
+  <h2>Type "YES" to verify you're human:</h2>
+  <input type="text" id="verifyInput" placeholder="Type YES here" />
+  <button onclick="verifyUser()">Verify</button>
+</div>
+
+<!-- 🧭 NAVIGATION -->
+<nav class="navbar" id="navBar" style="display:none;">
+  <button onclick="showPage('introPage')">🏠 Home</button>
+  <button onclick="showPage('accountsPage')">🔗 Accounts</button>
+  <button onclick="showPage('projectsPage')">💼 Projects</button>
+  <button onclick="showPage('contactPage')">📬 Contact</button>
+  <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  <button onclick="toggleLightMode()">☀️ Light Mode</button>
+</nav>
+
+<!-- 🏠 INTRO PAGE -->
+<div class="page" id="introPage">
+  <section class="page-content">
+    <h1>John Carlo S. Legaspi</h1>
+    <div class="photo-circle">
+      <img src="https://lh3.googleusercontent.com/a/ACg8ocJbn9SUAwcR2NL8Rsk_ztJXC7AACSNnxlVEbMNC_ecnSBf7htU=s360-c-no" alt="1x1 ID Photo">
+    </div>
+    <p class="bio">Hello there! I am John Carlo Legaspi, an aspiring cybersecurity professional with a strong passion for technology and community involvement. I believe in combining technical skills with meaningful impact. I am currently studying at FEU Institute of Technology. Welcome to my portfolio where you can explore my work and connect with me!</p>
+
+    <div class="info-block">
+      <h3>Personal Information</h3>
+      <p><strong>Birth Date:</strong> May 15, 2006</p>
+      <p><strong>Birth Place:</strong> North Caloocan</p>
+      <p><strong>Address:</strong> Blk. 17 lot 36 Maligaya St., Villa Muzon Subd., Muzon East, SJDM, Bulacan 3023</p>
+      <p><strong>Status:</strong> Single</p>
+    </div>
+
+    <div class="info-block">
+      <h3>Education</h3>
+      <p><strong>University:</strong> FEU Institute of Technology</p>
+      <p><strong>Program:</strong> B.S. in IT with Specialization in Cybersecurity</p>
+    </div>
+
+    <div class="info-block">
+      <h3>Hobbies</h3>
+      <ul>
+        <li>Seeking and Loving God (An everyday priority type of hobby)</li>
+        <li>Gaming (Valorant & other FPS Games)</li>
+        <li>Volunteering in community activities</li>
+        <li>Playing Drums</li>
+        <li>Basketball</li>
+        <li>Cycling</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h3>Traits</h3>
+      <ul>
+        <li>Attentive & Proactive</li>
+        <li>Composed in Critical Situations</li>
+        <li>Good Communicator & Listener</li>
+        <li>Works well individually or with a group</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h3>Skills</h3>
+      <ul>
+        <li>Programming</li>
+        <li>Cross Stitching</li>
+        <li>Problem Solving & Case Analysis</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- 🔗 ACCOUNTS PAGE -->
+<div class="page" id="accountsPage">
+  <section class="page-content">
+    <h2>Social Media Links</h2>
+    <ul>
+      <li><a href="https://www.facebook.com/jaycee.legaspi.53051" target="_blank">Facebook</a></li>
+      <li><a href="https://www.instagram.com/jc33sl/" target="_blank">Instagram</a></li>
+      <li><a href="https://www.linkedin.com/in/john-carlo-legaspi-b7b3391b4" target="_blank">LinkedIn</a></li>
+    </ul>
+  </section>
+</div>
+
+<!-- 💼 PROJECTS PAGE -->
+<div class="page" id="projectsPage">
+  <section class="page-content">
+    <h2>My Projects</h2>
+    <div class="project-card"><a href="IT0043L_Lab_2_by_Legaspi.html" target="_blank">Project 1</a></div>
+    <div class="project-card"><a href="IT0043L_Lab_3_by_Legaspi.html" target="_blank">Project 2</a></div>
+    <div class="project-card"><a href="IT0043L_Lab_4_by_Legaspi.html" target="_blank">Project 3</a></div>
+    <div class="project-card"><a href="IT0043L_Lab_5_by_Legaspi.html" target="_blank">Project 4</a></div>
+  </section>
+</div>
+
+<!-- 📬 CONTACT PAGE -->
+<div class="page" id="contactPage">
+  <section class="page-content">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <label>Full Name (Lastname, Firstname M.):</label>
+      <input type="text" id="fullname" required>
+      <label>Age (18+):</label>
+      <input type="number" id="age" required>
+      <label>Email:</label>
+      <input type="email" id="email" required>
+      <label>Message:</label>
+      <textarea id="message" required></textarea>
+      <button type="button" onclick="validateContact()">Submit</button>
+      <button type="button" onclick="cancelForm()" style="background-color: #ef4444; margin-left: 10px;">Cancel</button>
+    </form>
+    <p id="errorMsg" style="color:red;"></p>
+  </section>
+</div>
+
+<!-- 📜 JAVASCRIPT -->
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwtzxT5pT_zLhiPyzS2ZwTD1A3JvpR_s3pu_9KXgSHzw4s2xvY5V-n_sINTx7rK90Qd/exec";
+
+  window.onload = function () {
+    setTimeout(() => {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("verification").style.display = "block";
+    }, 2000);
+  };
+
+  function verifyUser() {
+    const input = document.getElementById("verifyInput").value.trim();
+    if (input.toUpperCase() === "YES") {
+      document.getElementById("verification").style.display = "none";
+      document.getElementById("navBar").style.display = "flex";
+      showPage('introPage');
+    } else {
+      alert("Incorrect! Please type YES to proceed.");
+    }
+  }
+
+  function triggerPageTransition(message, gifURL, callback) {
+    const overlay = document.getElementById("pageTransition");
+    const text = document.getElementById("transitionText");
+    const img = document.getElementById("transitionImage");
+    text.innerText = message;
+    img.src = gifURL;
+    overlay.style.display = "flex";
+    setTimeout(() => {
+      overlay.style.display = "none";
+      callback();
+    }, 2500);
+  }
+
+  function showPage(pageId) {
+    const transitions = {
+      "introPage": {
+        msg: "Welcome to John Carlo Legaspi's Portfolio Home Page!",
+        gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjEyOW92YXQydDN6c2t1bjEwenRwdDZ2Yzk2ejVjOHk4d3phbGc5ciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/gL3OlapcOkyCUx87BO/giphy.gif"
+      },
+      "accountsPage": {
+        msg: "Connecting you to my accounts...",
+        gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anR5Njh2ZWdxcGdwMHp4cTE3czhxa3Nhem9wcjNrcm5tb3piMHN6eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BIjEB36bISPqlbCJJg/giphy.gif"
+      },
+      "projectsPage": {
+        msg: "Welcome to my projects page!",
+        gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmUzcmQ2eXViMzA5M2cxbGxhMDc4YmI1cWZibjR2ODA4anhuNnlraCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/JCOY3YxLsEbmtaUkgZ/giphy.gif"
+      },
+      "contactPage": {
+        msg: "Do you want to contact me?",
+        gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cW4ycWQ4ZXBmc3Q5NGpqYTd6Ym82eDY1bnpja3NrNTdnbzBlaDE3OSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/bpEC7zFMLLHOX6yIiW/giphy.gif"
+      }
+    };
+
+const transition = transitions[pageId] || {
+      msg: "Loading...",
+    };
+
+    triggerPageTransition(transition.msg, transition.gif, () => {
+      document.querySelectorAll('.page').forEach(p => p.style.display = "none");
+      document.getElementById(pageId).style.display = "block";
+    });
+  }
+
+  setInterval(() => {
+    const colors = ["#fce4ec", "#fff3e0", "#e0f7fa", "#ede7f6"];
+    document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+  }, 5000);
+
+  function toggleDarkMode() {
+    document.body.classList.add("dark-mode");
+  }
+
+  function toggleLightMode() {
+    document.body.classList.remove("dark-mode");
+  }
+
+  function validateContact() {
+    const inputs = [
+      { element: document.getElementById("fullname"), type: "name" },
+      { element: document.getElementById("age"), type: "age" },
+      { element: document.getElementById("email"), type: "email" },
+      { element: document.getElementById("message"), type: "message" }
+    ];
+    const nameFormat = /^[A-Z][a-zA-Z]+(?:\s[A-Z][a-zA-Z]+)*,\s[A-Z][a-zA-Z]+(?:\s[A-Z][a-zA-Z]+)*\s[A-Z]\.$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const errorMsg = document.getElementById("errorMsg");
+    let index = 0;
+    let valid = true;
+    errorMsg.innerText = "";
+    inputs.forEach(input => input.element.classList.remove("error"));
+    while (index < inputs.length) {
+      const input = inputs[index];
+      const value = input.element.value.trim();
+      switch (input.type) {
+        case "name":
+          if (!nameFormat.test(value)) {
+            input.element.classList.add("error");
+            valid = false;
+          }
+          break;
+        case "age":
+          if (isNaN(value) || parseInt(value) < 18) {
+            input.element.classList.add("error");
+            valid = false;
+          }
+          break;
+        case "email":
+          if (!emailPattern.test(value)) {
+            input.element.classList.add("error");
+            valid = false;
+          }
+          break;
+        case "message":
+          if (value.length === 0) {
+            input.element.classList.add("error");
+            valid = false;
+          }
+          break;
+      }
+      index++;
+    }
+    if (!valid) {
+      errorMsg.innerText = "Please correct the highlighted fields.";
+    } else {
+      submitContactForm();
+    }
+  }
+
+  function submitContactForm() {
+    document.getElementById("formLoading").style.display = "flex";
+    const fullname = document.getElementById("fullname").value.trim();
+    const age = document.getElementById("age").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+    const formData = new URLSearchParams();
+    formData.append("name", fullname);
+    formData.append("age", age);
+    formData.append("email", email);
+    formData.append("message", message);
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: formData
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      document.getElementById("formLoading").style.display = "none";
+      if (data.result === "success") {
+        document.getElementById("contactForm").reset();
+        document.getElementById("errorMsg").innerText = "";
+        document.getElementById("successPopup").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("successPopup").style.display = "none";
+        }, 5000);
+      } else {
+        alert("Error: " + data.message);
+      }
+    })
+    .catch((error) => {
+      document.getElementById("formLoading").style.display = "none";
+      console.error("Error!", error.message);
+      alert("Failed to send message. Please try again.");
+    });
+  }
+
+  function cancelForm() {
+    if (confirm("Are you sure you want to cancel and clear this form?")) {
+      document.getElementById("contactForm").reset();
+      document.querySelectorAll("#contactForm input, #contactForm textarea").forEach(input => {
+        input.classList.remove("error");
+      });
+      document.getElementById("errorMsg").innerText = "";
+    }
+  }
+</script>
+</body>
+</html>

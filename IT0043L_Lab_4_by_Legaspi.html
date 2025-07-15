@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SDG Form</title>
+  <link rel="stylesheet" href="project 3.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>SDG Selection Form</h1>
+    <form id="sdgForm" onsubmit="return validateForm()">
+      <!-- Name Input -->
+      <label for="name">Full Name (Surname, First Name MI.):</label>
+      <input type="text" id="name" name="name" 
+             placeholder="e.g. Dela Cruz, Juan M." 
+             required 
+             pattern="^[A-Za-z][A-Za-z\s\-]*,\s[A-Za-z][A-Za-z\s\-]*\s[A-Z]\.$"
+             title="Format: Surname, Firstname M. (e.g., Dela Cruz, Juan M.)">
+
+      <!-- Age Input -->
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="18" required placeholder="e.g. 18">
+
+      <!-- Gender Input -->
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="" disabled selected>Select your gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <!-- Email Input -->
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" 
+             placeholder="example@email.com" required>
+
+      <!-- SDG Selection -->
+      <label for="sdg">Preferred Sustainable Development Goal (SDG):</label>
+      <select id="sdg" name="sdg" required>
+        <option value="" disabled selected>Select one SDG</option>
+        <option value="1">No Poverty</option>
+        <option value="2">Zero Hunger</option>
+        <option value="3">Good Health and Well-being</option>
+        <option value="4">Quality Education</option>
+        <option value="5">Gender Equality</option>
+        <option value="6">Clean Water and Sanitation</option>
+        <option value="7">Affordable and Clean Energy</option>
+        <option value="8">Decent Work and Economic Growth</option>
+        <option value="9">Industry, Innovation, and Infrastructure</option>
+        <option value="10">Reduced Inequalities</option>
+        <option value="11">Sustainable Cities and Communities</option>
+        <option value="12">Responsible Consumption and Production</option>
+        <option value="13">Climate Action</option>
+        <option value="14">Life Below Water</option>
+        <option value="15">Life on Land</option>
+        <option value="16">Peace, Justice, and Strong Institutions</option>
+        <option value="17">Partnerships for the Goals</option>
+      </select>
+
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const age = document.getElementById("age").value;
+      if (age < 18) {
+        alert("You must be 18 or older to submit this form.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+  <a href="IT0043L Final Project by Legaspi (without human verification).html" class="return-home-button">Return to John Carlo Legaspi's Portfolio</a>
+</body>
+</html>
